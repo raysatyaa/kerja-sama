@@ -3,231 +3,1382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan untuk Eka</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Proposal Kerja Sama ElService</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(120deg, #2b5876, #4e4376);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            margin: 0;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .card {
-            background-color: white;
-            padding: 35px 30px;
-            border-radius: 12px;
-            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            max-width: 400px;
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .bg-gradient {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: blobFloat 20s infinite ease-in-out;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: #3b82f6;
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: #1e3a8a;
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 5s;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: #60a5fa;
+            top: 50%;
+            right: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+            66% {
+                transform: translate(-50px, 50px) scale(0.9);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
             position: relative;
         }
-        h1 {
-            color: #2b5876;
-            margin-bottom: 25px;
-            font-size: 26px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
-        p {
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 35px;
-            color: #555;
+
+        .logo-orbit {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.4), transparent 60%),
+                        radial-gradient(circle at 80% 120%, rgba(59, 130, 246, 0.25), transparent 55%);
+            box-shadow:
+                0 18px 40px rgba(15, 23, 42, 0.9),
+                0 0 0 1px rgba(148, 163, 184, 0.12),
+                0 0 40px rgba(59, 130, 246, 0.5);
+            overflow: visible;
         }
-        button {
-            background: linear-gradient(to right, #2b5876, #4e4376);
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(43, 88, 118, 0.3);
-            outline: none;
-            letter-spacing: 0.5px;
-            font-family: 'Montserrat', sans-serif;
+
+        .logo-orbit::before {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: inherit;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-top-color: rgba(96, 165, 250, 0.9);
+            border-right-color: rgba(59, 130, 246, 0.7);
+            border-bottom-color: rgba(15, 23, 42, 0.0);
+            border-left-color: rgba(15, 23, 42, 0.0);
+            transform-origin: center;
+            animation: orbitSpin 10s linear infinite;
+            pointer-events: none;
         }
-        button:hover, button:focus {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(43, 88, 118, 0.4);
+
+        .logo-orbit::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #e5f2ff, #3b82f6);
+            box-shadow: 0 0 18px rgba(59, 130, 246, 0.9);
+            top: -4px;
+            right: 18px;
+            transform-origin: -40px 24px;
+            animation: orbitDot 10s linear infinite;
         }
-        button:active {
-            transform: translateY(1px);
-            box-shadow: 0 4px 8px rgba(43, 88, 118, 0.3);
-        }
-        .btn-decline {
-            background: linear-gradient(to right, #e74c3c, #c0392b);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
-            margin-left: 15px;
-        }
-        .btn-decline:hover, .btn-decline:focus {
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-        }
-        .btn-decline:active {
-            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
-        }
-        .page {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            transform: translateY(15px);
-        }
-        .active {
+
+        .logo {
+            height: 88px;
+            width: auto;
             display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.7));
+            animation: logoFloat 6s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .status-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ecfeff, #22c55e);
+            box-shadow:
+                0 0 12px rgba(34, 197, 94, 0.9),
+                0 0 0 3px rgba(22, 163, 74, 0.35);
+            bottom: -4px;
+            right: 18px;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-6px) scale(1.03);
+            }
+        }
+
+        @keyframes orbitSpin {
+            0% {
+                transform: rotateX(16deg) rotateZ(0deg);
+            }
+            50% {
+                transform: rotateX(22deg) rotateZ(180deg);
+            }
+            100% {
+                transform: rotateX(16deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes orbitDot {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .logo-accent {
+            color: #3b82f6;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            color: #9ca3af;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+
+        .hero-section {
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            color: #9ca3af;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .section {
+            background: #111111;
+            border: 1px solid #1f1f1f;
+            border-radius: 16px;
+            padding: 60px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:hover {
+            border-color: #2a2a2a;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 5em;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 1.05em;
+            color: #b4b4b4;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box p {
+            color: #e0e7ff;
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            background: #0a0a0a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: #1a1a1a;
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 20px;
+            border-top: 1px solid #1f1f1f;
+            color: #b4b4b4;
+        }
+
+        tr:hover td {
+            background: #0f0f0f;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .featured-row {
+            background: #0f1419;
+        }
+
+        .featured-row td {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #0a0a0a;
+            border: 1px solid #1f1f1f;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .stat-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .stat-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: #0a0a0a;
+            border: 1px solid #1f1f1f;
+            padding: 32px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #1e3a8a;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+        }
+
+        .feature-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 0.95em;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .payment-item {
+            background: #0a0a0a;
+            border: 1px solid #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            color: #e0e0e0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .payment-item:hover {
+            border-color: #3b82f6;
+            background: #0f0f0f;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 80px 60px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .cta-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .cta-text {
+            font-size: 1.2em;
+            color: #e0e7ff;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.05em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #1e3a8a;
+        }
+
+        .btn-primary:hover {
+            background: #f3f4f6;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        footer {
+            border-top: 1px solid #1f1f1f;
+            padding: 60px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.05em;
+        }
+
+        .footer-link:hover {
+            color: #3b82f6;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+
+        .example-calc {
+            background: #0a0a0a;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .calc-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: #3b82f6;
+            font-size: 1.1em;
+        }
+
+        .referral-steps {
+            margin-top: 24px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .referral-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .referral-step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #eff6ff, #3b82f6);
+            color: #020617;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95em;
+            box-shadow: 0 0 18px rgba(59, 130, 246, 0.6);
+            flex-shrink: 0;
+        }
+
+        .referral-step-content {
+            color: #d1d5db;
+            font-size: 0.98em;
+        }
+
+        .referral-highlight {
+            margin-top: 20px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: rgba(22, 163, 74, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            color: #bbf7d0;
+            font-size: 0.95em;
+        }
+
+        .testimoni-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .testimoni-slot {
+            border-radius: 14px;
+            background: radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.15), transparent 60%),
+                        #020617;
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 160px;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimoni-slot::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.35), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .testimoni-slot:hover::before {
+            opacity: 1;
+        }
+
+        .testimoni-label {
+            font-size: 0.9em;
+            color: #9ca3af;
+        }
+
+        .testimoni-placeholder {
+            flex: 1;
+            border-radius: 10px;
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-size: 0.85em;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .testimoni-slot img {
+            width: 100%;
+            height: auto;
+            min-height: 160px;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            flex: 1;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimoni-slot img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .testimoni-note {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+
+        /* Lightbox Modal Styles */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+            overflow: auto;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .lightbox-close:active {
+            transform: rotate(90deg) scale(0.9);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-content {
+                max-width: 95%;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section {
+                padding: 40px 30px;
+            }
+            
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+            .section-number {
+                font-size: 3em;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .cta-section {
+                padding: 50px 30px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .time-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 10px;
-        }
-        .time-options button {
-            padding: 12px 0;
-            width: 100%;
-            font-size: 15px;
-        }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-            resize: vertical;
-            outline: none;
-            transition: border 0.3s ease;
-            font-size: 15px;
-        }
-        textarea:focus {
-            border-color: #2b5876;
-            box-shadow: 0 0 0 2px rgba(43, 88, 118, 0.2);
-        }
-        @media (max-width: 360px) {
-            h1 {
-                font-size: 22px;
-            }
-            p {
-                font-size: 15px;
-                margin-bottom: 25px;
-            }
-            .card {
-                padding: 25px 18px;
-            }
-            .time-options {
-                grid-template-columns: 1fr;
-            }
-            button {
-                padding: 12px 25px;
-            }
-            .btn-decline {
-                margin-left: 0;
-                margin-top: 10px;
-            }
+
+        .parallax {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="page active" id="page1">
-            <h1>Hallo Eka Putri</h1>
-            <p>Ada pesan khusus untukmu...</p>
-            <button onclick="nextPage()">Lanjut</button>
+    <div class="grain"></div>
+    <div class="bg-gradient">
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo-orbit">
+                    <img src="gambar/elservice.png" alt="ElService Logo" class="logo">
+                    <span class="status-dot"></span>
+                </div>
+                <div class="tagline">Professional Gadget Repair Services</div>
+            </div>
+        </header>
+
+        <div class="hero-section fade-in">
+            <h1 class="hero-title">Partnership Program</h1>
+            <p class="hero-subtitle">Program kolaborasi berbasis voucher dan komisi untuk kreator dan influencer Instagram</p>
         </div>
-        
-        <div class="page" id="page2">
-            <h1>Pesan untuk Kamu</h1>
-            <p>Halo maaf ga bales pesan whatsapp nya lagi, aku gatau mau ngomong apa</p>
-            <button onclick="nextPage()">Lanjut</button>
-        </div>
-        
-        <div class="page" id="page3">
-            <h1>Mau Ngobrol?</h1>
-            <p>Kamu Senggang ga ngobrol via call yuk</p>
-            <div class="button-group">
-                <button onclick="nextPage()">Ayok</button>
-                <button class="btn-decline" onclick="showDeclinePage()">Tidak</button>
+
+        <div class="section fade-in">
+            <span class="section-number">01</span>
+            <h2>Tentang Program</h2>
+            <p>ElService adalah toko layanan perbaikan handphone dan gadget profesional. Kami mengajak Anda bergabung dalam program promosi berbasis kode voucher dan komisi yang dirancang khusus untuk para kreator dan pemilik akun Instagram.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Mekanisme Sederhana:</strong> Dapatkan kode voucher personal Anda (contoh: RAY50, DANNYFIX). Setiap pelanggan yang menggunakan kode Anda akan mendapatkan diskon hingga Rp50.000, dan Anda mendapat komisi dari setiap transaksi.</p>
             </div>
         </div>
-        
-        <div class="page" id="page4">
-            <h1>Pilih Waktu</h1>
-            <p>Kapan kamu senggang untuk ngobrol?</p>
-            <div class="time-options">
-                <button onclick="sendWhatsApp('Sore ini')">Sore ini</button>
-                <button onclick="sendWhatsApp('Malam ini')">Malam ini</button>
-                <button onclick="sendWhatsApp('Besok')">Besok</button>
-                <button onclick="sendWhatsApp('Lusa')">Lusa</button>
+
+        <div class="section fade-in">
+            <span class="section-number">02</span>
+            <h2>Testimoni Pelanggan</h2>
+            <p>Lihat bukti kepuasan pelanggan ElService. Testimoni ini menunjukkan kualitas layanan kami yang dapat Anda tawarkan kepada audience Anda dengan percaya diri.</p>
+
+            <div class="testimoni-grid">
+                <div class="testimoni-slot">
+                    <div class="testimoni-label">Testimoni Pelanggan</div>
+                    <!-- Klik gambar untuk memperbesar -->
+                    <img src="gambar/testimoni1.jpeg" alt="Testimoni pelanggan ElService" onerror="this.outerHTML='<div class=\'testimoni-placeholder\'>Foto testimoni pelanggan (sebelum/sesudah service atau chat pelanggan)</div>';">
+                </div>
+                <div class="testimoni-slot">
+                    <div class="testimoni-label">Testimoni Pelanggan</div>
+                    <!-- Klik gambar untuk memperbesar -->
+                    <img src="gambar/testimoni2.png" alt="Testimoni pelanggan ElService" onerror="this.outerHTML='<div class=\'testimoni-placeholder\'>Foto testimoni pelanggan (screenshot chat atau review)</div>';">
+                </div>
+                <div class="testimoni-slot">
+                    <div class="testimoni-label">Testimoni Pelanggan</div>
+                    <!-- Klik gambar untuk memperbesar -->
+                    <img src="gambar/testimoni-3.jpg" alt="Testimoni pelanggan ElService" onerror="this.outerHTML='<div class=\'testimoni-placeholder\'>Foto testimoni pelanggan (Instagram Story atau review pelanggan)</div>';">
+                </div>
+            </div>
+
+            <div class="testimoni-note">
+                <strong>Tips:</strong> Klik pada gambar untuk melihat dalam ukuran penuh. Semua testimoni ini adalah bukti nyata kepuasan pelanggan ElService yang dapat Anda bagikan kepada audience Anda.
             </div>
         </div>
-        
-        <div class="page" id="page5">
-            <h1>Alasan Penolakan</h1>
-            <p>Silakan tulis alasan kenapa kamu tidak bisa:</p>
-            <textarea id="decline-message" placeholder="Misalnya: Maaf, aku sedang sibuk dengan tugas kuliah..."></textarea>
-            <button onclick="sendDeclineMessage()">Kirim Pesan</button>
+
+        <div class="section fade-in">
+            <span class="section-number">03</span>
+            <h2>Struktur Komisi</h2>
+            <p>Sistem komisi berjenjang yang meningkat seiring pertumbuhan pengguna kode voucher Anda.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jumlah Pengguna</th>
+                        <th>Persentase Komisi</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1–4 orang</td>
+                        <td>5%</td>
+                        <td>Level 1</td>
+                    </tr>
+                    <tr>
+                        <td>5–14 orang</td>
+                        <td>6%</td>
+                        <td>Level 2</td>
+                    </tr>
+                    <tr>
+                        <td>15–29 orang</td>
+                        <td>7%</td>
+                        <td>Level 3</td>
+                    </tr>
+                    <tr>
+                        <td>30–49 orang</td>
+                        <td>8%</td>
+                        <td>Level 4</td>
+                    </tr>
+                    <tr>
+                        <td>50–99 orang</td>
+                        <td>9%</td>
+                        <td>Level 5</td>
+                    </tr>
+                    <tr class="featured-row">
+                        <td>≥100 orang</td>
+                        <td>10%</td>
+                        <td>Level 6</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Simulasi Pendapatan</h3>
+            <p>Perhitungan komisi berdasarkan transaksi service senilai Rp250.000:</p>
+            
+            <div class="example-calc">
+                <div class="calc-row">
+                    <span>Level 1 (5%)</span>
+                    <span>Rp12.500</span>
+                </div>
+                <div class="calc-row">
+                    <span>Level 2 (6%)</span>
+                    <span>Rp15.000</span>
+                </div>
+                <div class="calc-row">
+                    <span>Level 3 (7%)</span>
+                    <span>Rp17.500</span>
+                </div>
+                <div class="calc-row">
+                    <span>Level 4 (8%)</span>
+                    <span>Rp20.000</span>
+                </div>
+                <div class="calc-row">
+                    <span>Level 5 (9%)</span>
+                    <span>Rp22.500</span>
+                </div>
+                <div class="calc-row">
+                    <span>Level 6 (10%)</span>
+                    <span>Rp25.000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <span class="section-number">04</span>
+            <h2>Cara Menggunakan Kode Referral</h2>
+            <p>Cara pakai sangat sederhana. Anda cukup merekomendasikan ElService ke teman/follower dan minta mereka menyebutkan nama atau kode Anda saat service.</p>
+            
+            <div class="referral-steps">
+                <div class="referral-step">
+                    <div class="referral-step-number">1</div>
+                    <div class="referral-step-content">
+                        Beritahu orang lain (teman, keluarga, follower) bahwa mereka bisa service HP, laptop, atau PC di <strong>ElService</strong> dan akan dapat <strong>diskon Rp10.000 sampai dengan Rp50.000</strong> jika menyebutkan nama atau kode referral Anda.
+                    </div>
+                </div>
+                <div class="referral-step">
+                    <div class="referral-step-number">2</div>
+                    <div class="referral-step-content">
+                        Saat mereka datang ke ElService atau chat WhatsApp, minta mereka untuk <strong>menyebutkan nama/kode Anda</strong> sebelum transaksi (contoh: “Saya dari kode <strong>RAY50</strong>” atau “Saya direkomendasikan oleh <strong>Ray</strong>”).
+                    </div>
+                </div>
+                <div class="referral-step">
+                    <div class="referral-step-number">3</div>
+                    <div class="referral-step-content">
+                        Setelah transaksi service selesai dan tercatat dengan kode/nama Anda, <strong>komisi langsung dihitung</strong> dan akan masuk ke saldo komisi Anda.
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-highlight">
+                Contoh singkat: Anda menginformasikan ke follower bahwa “Kalau mau service HP di ElService, sebut nama saya atau pakai kode saya di kasir/WhatsApp untuk dapat diskon Rp10.000–Rp50.000.” Ketika mereka menyelesaikan transaksi, mereka mendapat diskon dan Anda otomatis mendapatkan komisinya.
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <span class="section-number">05</span>
+            <h2>Sistem Pelaporan</h2>
+            <p>Transparansi penuh dengan laporan detail yang dikirim secara berkala.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">Mingguan</div>
+                    <div class="stat-label">Frekuensi Laporan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">Real-time</div>
+                    <div class="stat-label">Update Data</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Transparansi</div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Jumlah Penggunaan</div>
+                    <div class="feature-desc">Tracking lengkap setiap penggunaan kode voucher Anda</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">Total Komisi</div>
+                    <div class="feature-desc">Perhitungan akurat komisi yang Anda dapatkan</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-title">Rekap Transaksi</div>
+                    <div class="feature-desc">Detail setiap transaksi untuk evaluasi performa</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <span class="section-number">06</span>
+            <h2>Pencairan Komisi</h2>
+            <p>Sistem pencairan yang fleksibel dan cepat tanpa batas minimum penarikan.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Pencairan Instant:</strong> Komisi dapat dicairkan kapan saja tanpa batas minimum. Proses cepat, aman, dan dilakukan langsung oleh tim ElService.</p>
+            </div>
+
+            <h3>Metode Pembayaran</h3>
+            <div class="payment-grid">
+                <div class="payment-item">DANA</div>
+                <div class="payment-item">BCA</div>
+                <div class="payment-item">BRI</div>
+                <div class="payment-item">BNI</div>
+                <div class="payment-item">Mandiri</div>
+                <div class="payment-item">SeaBank</div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: #6b7280;">Dan metode pembayaran lainnya sesuai kebutuhan Anda</p>
+        </div>
+
+        <div class="section fade-in">
+            <span class="section-number">07</span>
+            <h2>Keuntungan Partner</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💵</div>
+                    <div class="feature-title">Passive Income</div>
+                    <div class="feature-desc">Dapatkan pendapatan tambahan tanpa effort berlebih</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-title">Value untuk Audience</div>
+                    <div class="feature-desc">Berikan benefit nyata untuk followers Anda</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Zero Investment</div>
+                    <div class="feature-desc">Tidak memerlukan modal atau biaya pendaftaran</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <div class="feature-title">Long-term Partnership</div>
+                    <div class="feature-desc">Kerja sama berkelanjutan dengan benefit jangka panjang</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">Growth Potential</div>
+                    <div class="feature-desc">Komisi meningkat seiring pertumbuhan pengguna</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Cross Promotion</div>
+                    <div class="feature-desc">Potensi promosi silang dari ElService</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section fade-in">
+            <h2 class="cta-title">Mari Berkolaborasi</h2>
+            <p class="cta-text">Bergabunglah dengan program partnership kami dan mulai dapatkan passive income hari ini</p>
+            <div class="btn-group">
+                <a href="https://wa.me/6288802142498" class="btn btn-primary" target="_blank">Hubungi via WhatsApp</a>
+                <a href="https://instagram.com/ElServicee.id" class="btn btn-secondary" target="_blank">Follow Instagram</a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-brand">ElService</div>
+            <div class="footer-links">
+                <a href="https://instagram.com/ElServicee.id" class="footer-link" target="_blank">Instagram</a>
+                <a href="https://wa.me/6288802142498" class="footer-link" target="_blank">WhatsApp: 088802142498</a>
+            </div>
+            <div class="footer-copyright">© 2024 ElService. Professional Gadget & Handphone Repair Services</div>
+        </footer>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="Testimoni diperbesar">
         </div>
     </div>
 
     <script>
-        let currentPage = 1;
-        const totalPages = 5;
+        // Intersection Observer untuk fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect pada scroll
+        let ticking = false;
         
-        function nextPage() {
-            if (currentPage < totalPages) {
-                document.getElementById(`page${currentPage}`).classList.remove('active');
-                currentPage++;
-                setTimeout(() => {
-                    document.getElementById(`page${currentPage}`).classList.add('active');
-                }, 100);
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const parallaxElements = document.querySelectorAll('.section-number');
+                    
+                    parallaxElements.forEach((el, index) => {
+                        const speed = 0.5;
+                        const yPos = -(scrolled * speed * (index + 1) * 0.05);
+                        el.style.transform = `translateY(${yPos}px)`;
+                    });
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
             }
-        }
-        
-        function showDeclinePage() {
-            document.getElementById(`page${currentPage}`).classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('page5').classList.add('active');
-            }, 100);
-        }
-        
-        function sendWhatsApp(time) {
-            const message = `ayok aku senggang nih di ${time} nanti`;
-            const encodedMessage = encodeURIComponent(message);
-            window.location.href = `https://wa.me/6282215662010?text=${encodedMessage}`;
-        }
-        
-        function sendDeclineMessage() {
-            const messageInput = document.getElementById('decline-message');
-            let message = messageInput.value.trim();
-            
-            // Jika pesan kosong, gunakan pesan default
-            if (!message) {
-                message = "Maaf, aku sedang tidak bisa ngobrol via call untuk saat ini";
+        });
+
+        // Smooth hover effect untuk table rows
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Counter animation untuk stat values
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                if (element.textContent.includes('%')) {
+                    element.textContent = Math.floor(progress * (end - start) + start) + '%';
+                } else {
+                    element.textContent = element.getAttribute('data-text') || element.textContent;
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Trigger counter animation ketika element visible
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    entry.target.classList.add('animated');
+                    const value = entry.target.textContent;
+                    if (value.includes('%')) {
+                        const num = parseInt(value);
+                        animateValue(entry.target, 0, num, 1000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-value').forEach(el => {
+            statObserver.observe(el);
+        });
+
+        // Ripple effect untuk buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Lightbox functionality untuk gambar testimoni
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const testimoniImages = document.querySelectorAll('.testimoni-slot img');
+
+        // Buka lightbox saat gambar diklik
+        testimoniImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt;
+                lightboxModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+            });
+        });
+
+        // Tutup lightbox saat tombol close diklik
+        lightboxClose.addEventListener('click', function() {
+            closeLightbox();
+        });
+
+        // Tutup lightbox saat klik di luar gambar
+        lightboxModal.addEventListener('click', function(e) {
+            if (e.target === lightboxModal) {
+                closeLightbox();
             }
-            
-            const encodedMessage = encodeURIComponent(message);
-            window.location.href = `https://wa.me/6282215662010?text=${encodedMessage}`;
+        });
+
+        // Tutup lightbox dengan tombol ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scroll
         }
     </script>
 </body>
